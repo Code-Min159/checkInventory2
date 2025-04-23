@@ -43,7 +43,7 @@ public interface MaterailMapper {
     @Delete("DELETE FROM material WHERE id = #{id}")
     void deleteMaterial(String id);
 
-    
+
     //查詢食品添加物
     @Select("SELECT * FROM material WHERE is_food_addtives = #{isFoodAddtives}")
     List<Material> searchFoodAddtives(boolean isFoodAddtives);

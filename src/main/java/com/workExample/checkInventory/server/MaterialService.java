@@ -100,6 +100,10 @@ public class MaterialService {
         return foodAddtives;
     }
 
+    /***
+     * 查詢過敏原
+     * @return
+     */
     public List<Material> searchFoodAllergen(boolean isFoodAllergen){
         List<Material> foodAllergen = materailMapper.searchFoodAllergen(isFoodAllergen);
         return foodAllergen;

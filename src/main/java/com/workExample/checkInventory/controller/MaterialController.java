@@ -97,6 +97,7 @@ public class MaterialController {
         return response;
     }
 
+    // 查食品添加物
     @GetMapping("api/materail/searchFoodAddtives")
     public ApiResponse<List<Material>> searchFoodAddtives(){
         ApiResponse<List<Material>> response = new ApiResponse<>();

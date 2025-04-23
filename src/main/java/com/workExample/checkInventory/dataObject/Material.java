@@ -6,7 +6,7 @@ import lombok.Data;
 public class Material {
     private String id;        //原料編號  1個英文字母(B:原料、C:物料、D:半成品)+11碼數字  EX: B40206000001
     private String name;    //原料名稱
-    private double weight;  //重量規格
+    private double weight;  //重量規格(只有新增需要)
     private Integer effectiveDate;       //有效日期  不為0因此設定為Integer，沒有輸入為null
     private boolean isOutOfDate = false;    //是否過期
     private boolean isFoodAddtives = false; //是否為食品添加劑
