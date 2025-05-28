@@ -50,7 +50,7 @@ public class MaterialController {
         ApiResponse<Material> response = new ApiResponse<>();
         try{
             Material new_material = materialService.createMaterial(request.getId(),request.getName(), request.getEffectiveDate(),
-                                                                request.getWeight(),request.isOutOfDate(), request.isFoodAddtives(),
+                                                                request.isOutOfDate(), request.isFoodAddtives(),
                                                                 request.isFoodAllergen(), request.getLocation(), request.getDescription());
             response.setData(new_material);
             response.setStasus(HttpStatusCode.valueOf(200));
@@ -84,7 +84,7 @@ public class MaterialController {
     public ApiResponse<Material> upMaterel(@PathVariable("id") String id, @RequestBody Material request){
         ApiResponse<Material> response = new ApiResponse<>();
         try{
-            Material upMaterel = materialService.updateMaterial(id,request.getName(), request.getWeight(), request.getEffectiveDate(),
+            Material upMaterel = materialService.updateMaterial(id,request.getName(), request.getEffectiveDate(),
                                                                 request.isOutOfDate(), request.isFoodAddtives(),
                                                                 request.isFoodAllergen(), request.getLocation(), request.getDescription());
             response.setData(upMaterel);
@@ -129,32 +129,5 @@ public class MaterialController {
         }
         return response;
     }
-
-
-
-
-
-
-
-//    public Material searchEffectiveDate(){
-//
-//    }
-//
-//    public Integer caculationAmountBySchedule(){
-//
-//    }
-//
-//    public Integer caculationInventory(){
-//
-//    }
-//
-//
-//    public List<Material> searchDanagerMaterail(){
-//
-//    }
-
-
-
-
 
 }

@@ -3,10 +3,11 @@ package com.workExample.checkInventory.dataObject;
 import lombok.Data;
 
 @Data
-public class Material {
+//包材
+public class Package {
 
     //新增
-    private String id;      //原料編號  1個英文字母(B:原料、C:成品、D:半成品、Z:包材)+11碼數字  EX: B40206000001
+    private String id;      //原料編號  1個英文字母(B:原料、C:成品、D:半成品、Z:包材)+11碼數字  EX: Z101000001
     private String name;    //名稱
     private String unit; //重量單位  (20250521新增置資料庫設計表)
     private String description; //規格描述

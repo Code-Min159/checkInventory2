@@ -1,4 +1,4 @@
 package com.workExample.checkInventory.dao;
 
-public class ToDoMapper {
+public interface ToDoMapper {
 }

@@ -1,9 +1,5 @@
 package com.workExample.checkInventory.controller;
 
-import com.workExample.checkInventory.dataObject.ToDo;
-
-import java.util.List;
-
 public class ToDoController {
 
 

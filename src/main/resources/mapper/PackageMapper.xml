@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.workExample.checkInventory.dao.PackageMapper">
+    <!--//Namespace對應到Java接口: PackageMapper.java -->
+
+    <resultMap id="PackageWithProductsResult" type="com.workExample.checkInventory.dataObject.Package">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="products" javaType="java.util.List" ofType="com.workExample.checkInventory.dataObject.Product">
+            <!--//collection property=Package.java中的products屬性: javaType=List集合 -->
+            <id property="id" column="p_id"/>
+            <result property="name" column="p_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="getPackageWithProducts" resultMap="PackageWithProductsResult">
+        <!--//select id= PackageMapper.java中getPackageWithProducts的方法名稱: resultMap=要回應到哪個物件的結構(也就是上面resultMap的物件)-->
+        SELECT p.id as p_id, p.name as p_name, pkg.id as id, pkg.name as name
+        FROM package AS pkg
+        LEFT JOIN package_product_mapping AS ppm ON pkg.id = ppm.package_id
+        LEFT JOIN product AS p ON ppm.product_id = p.id
+        WHERE pkg.id = #{id}
+    </select>
+
+    <insert id="addProductToPackage">
+        INSERT INTO package_product_mapping (package_id, product_id)
+        VALUES (#{packageId}, #{productId})
+    </insert>
+
+</mapper>
