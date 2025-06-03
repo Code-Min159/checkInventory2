@@ -3,7 +3,7 @@ package com.workExample.checkInventory.dao;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public class PackageMapper {
+public interface PackageMapper {
     // This interface will contain methods for CRUD operations on Package data.
     // For example:
     // List<Package> findAll();

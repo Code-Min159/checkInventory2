@@ -148,7 +148,6 @@ public class ProductService {
 
 
     public Product getById(String id) {
-        // 這裡應該有一個查詢資料庫的邏輯來獲取產品
         return productMapper.getProducWithMaterials(id);
     }
 
