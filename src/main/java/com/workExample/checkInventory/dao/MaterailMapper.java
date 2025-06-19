@@ -27,13 +27,13 @@ public interface MaterailMapper {
     List<Material> getAllMaterials();
 
     //新增原料
-    @Insert("INSERT INTO material (id, name, effective_date, weight, is_out_of_date, is_food_addtives, location, description) " +
-            "VALUES (#{id}, #{name}, #{effectiveDate}, #{weight}, #{isOutOfDate}, #{isFoodAddtives}, #{location}, #{description})")
+    @Insert("INSERT INTO material (id, name, effective_date, is_out_of_date, is_food_addtives, location, description) " +
+            "VALUES (#{id}, #{name}, #{effectiveDate},  #{isOutOfDate}, #{isFoodAddtives}, #{location}, #{description})")
     @Options(useGeneratedKeys = true, keyProperty = "id")//新增資料的時候，透過這個方法自動帶入ID(會自己計算)
     void insert(Material material);
 
     //更新原料
-    @Update("UPDATE material SET name = #{name}, effective_date = #{effectiveDate}, weight = #{weight}, " +
+    @Update("UPDATE material SET name = #{name}, effective_date = #{effectiveDate}, " +
             "is_out_of_date = #{isOutOfDate}, is_food_addtives = #{isFoodAddtives}, is_food_allergen = #{isFoodAllergen}, " +
             "location = #{location}, description = #{description} " +
             "WHERE id = #{id}")

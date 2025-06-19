@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.workExample.checkInventory.dao.ProductMapper">
+<!--//Namespace對應到Java接口>ProductMapper.java -->
+    <resultMap id="ProductWithMaterialsResult" type="com.workExample.checkInventory.dataObject.Product">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+       <collection property="materials" javaType="java.util.List" ofType="com.workExample.checkInventory.dataObject.Material">
+       <!--//collection property=Product.java中的materials屬性: javaType=List集合 -->
+            <id property="id" column="m_id"/>
+            <result property="name" column="m_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="getProducWithMaterials" resultMap="ProductWithMaterialsResult">
+    <!--//select id= ProductMapper.java中getProducWithMaterials的方法名稱: resultMap=要回應到哪個物件的結構(也就是上面resultMap的物件)-->
+        SELECT pm.id as p_id, pm.name as p_name, material.id as m_id, material.name as m_name
+        FROM
+        (SELECT p.id, p.name, m.material_id
+            FROM product AS p
+            LEFT JOIN
+            product_material_mapping AS pm
+            ON p.id = m.product_id) as pm
+        LEFT JOIN
+        material
+        ON pm.material_id = material.id
+        WHERE
+        pm.id = #{id}
+    </select>
+
+    <insert id="addMaterial">
+        INSERT INTO product_material_mapping (product_id, material_id)
+        VALUES (#{productId}, #{materialId})
+    </insert>
+
+
+<!--    <insert id="createProduct">-->
+<!--        INSERT INTO product (materialList, id, name, unit, description, category, supplier, location, safeStock, isFoodAddtives, isFoodAllergen, isOutOfDate, effectiveDate)-->
+<!--        VALUES (#{materialList}, #{id}, #{name}, #{unit}, #{description}, #{category}, #{supplier}, #{location}, #{safeStock}, #{isFoodAddtives}, #{isFoodAllergen}, #{isOutOfDate}, #{effectiveDate})-->
+<!--    </insert>-->
+
+        <resultMap id="updateProductResult" type="com.workExample.checkInventory.dataObject.Product">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="unit" column="unit"/>
+            <result property="description" column="description"/>
+            <result property="category" column="category"/>
+            <result property="supplier" column="supplier"/>
+            <result property="location" column="location"/>
+            <result property="safeStock" column="safe_stock"/>
+            <result property="isFoodAddtives" column="is_foodAddtives"/>
+            <result property="isFoodAllergen" column="is_foodAllergen"/>
+            <result property="isOutOfDate" column="is_out_of_date"/>
+            <result property="effectiveDate" column="effective_date"/>
+            <collection property="materials" javaType="java.util.List" ofType="com.workExample.checkInventory.dataObject.Material">
+                <!--//collection property=Product.java中的materials屬性: javaType=List集合 -->
+                <id property="id" column="m_id"/>
+                <result property="name" column="m_name"/>
+            </collection>
+        </resultMap>
+    <update id="updateProduct" parameterType="com.workExample.checkInventory.dataObject.Product">
+        UPDATE product
+        SET name = #{name},
+            unit = #{unit},
+            description = #{description},
+            category = #{category},
+            supplier = #{supplier},
+            location = #{location},
+            safeStock = #{safeStock},
+            isFoodAddtives = #{isFoodAddtives},
+            isFoodAllergen = #{isFoodAllergen},
+            isOutOfDate = #{isOutOfDate},
+            effectiveDate = #{effectiveDate}
+        WHERE id = #{id}
+    </update>
+
+<!--    <delete id="deleteProduct">-->
+<!--        DELETE-->
+<!--        FROM product-->
+<!--        WHERE id = #{id}-->
+<!--    </delete>-->
+
+<!--    <resultMap id="getAllProductResult" type="com.workExample.checkInventory.dataObject.Product">-->
+<!--        <id property="id" column="id"/>-->
+<!--        <result property="name" column="name"/>-->
+<!--        <result property="unit" column="unit"/>-->
+<!--        <result property="description" column="description"/>-->
+<!--        <result property="category" column="category"/>-->
+<!--        <result property="supplier" column="supplier"/>-->
+<!--        <result property="location" column="location"/>-->
+<!--        <result property="safeStock" column="safe_stock"/>-->
+<!--        <result property="isFoodAddtives" column="is_foodAddtives"/>-->
+<!--        <result property="isFoodAllergen" column="is_foodAllergen"/>-->
+<!--        <result property="isOutOfDate" column="is_out_of_date"/>-->
+<!--        <result property="effectiveDate" column="effective_date"/>-->
+<!--        <collection property="materials" javaType="java.util.List" ofType="com.workExample.checkInventory.dataObject.Material">-->
+<!--            &lt;!&ndash;//collection property=Product.java中的materials屬性: javaType=List集合 &ndash;&gt;-->
+<!--            <id property="id" column="m_id"/>-->
+<!--            <result property="name" column="m_name"/>-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+<!--    <select id="getAllProduct"  resultMap="getAllProductResult">-->
+<!--        SELECT *-->
+<!--        FROM product-->
+<!--    </select>-->
+
+
+</mapper>

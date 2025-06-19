@@ -1,4 +1,4 @@
-package com.workExample.checkInventory.server;
+package com.workExample.checkInventory.service;
 
 
 import com.workExample.checkInventory.dao.MaterailMapper;
@@ -12,6 +12,7 @@ import java.util.Objects;
 public class MaterialService {
 
     private final MaterailMapper materailMapper; //sql+Mapper查詢使用
+
     //建構子:再啟動MaterialService的時候，初始化一些設定
     public MaterialService(MaterailMapper materailMapper){
         this.materailMapper = materailMapper;
@@ -44,13 +45,12 @@ public class MaterialService {
 //    // 取得原料  名稱用模糊查詢
 
     //create material
-    public Material createMaterial(String id, String name, Integer effectiveDate, double weight,
+    public Material createMaterial(String id, String name, Integer effectiveDate,
                                    boolean isOutOfDate, boolean isFoodAddtives, boolean isFoodAllergn, String location, String description)
             throws Exception {
         Material materel = new Material();
         materel.setId(id);
         materel.setName(name);
-        materel.setWeight(weight);
         materel.setEffectiveDate(effectiveDate);
         materel.setOutOfDate(isOutOfDate);
         materel.setFoodAddtives(isFoodAddtives);
@@ -70,7 +70,7 @@ public class MaterialService {
     // update Materail
     // 只有 名稱、重量可以改，其他的再新增的時候就要確定，不然就是要開放使用者一些權限去做權限相對應的事(同一個原料有可能會有多個不同的重量)
     // 有效日期輸入錯誤的情況能不能在這邊更改?還是要另外寫一個function去做
-    public Material updateMaterial(String id, String name, double weight, Integer effectivedate, boolean isOutOfDate,
+    public Material updateMaterial(String id, String name, Integer effectivedate, boolean isOutOfDate,
                                    boolean isFoodAddtivies, boolean isFoodAllergen, String description, String location) throws Exception {
         // 先查詢資料庫有沒有這個原料
         Material existing_material = materailMapper.getById(id);
@@ -79,7 +79,6 @@ public class MaterialService {
         }
         existing_material.setId(id);
         existing_material.setName(name);
-        existing_material.setWeight(weight);
         existing_material.setEffectiveDate(effectivedate);
         existing_material.setOutOfDate(isOutOfDate);
         existing_material.setFoodAddtives(isFoodAddtivies);
@@ -111,13 +110,6 @@ public class MaterialService {
 
 
 
-//    /***
-//     * 依照排程計算未來使用數量
-//     * @return
-//     */
-//    public Integer caculationAmountBySchedule(File inputFile){
-//
-//    }
 //
 //    /***
 //     * 輸入目前庫存計算剩餘庫存數量

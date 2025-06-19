@@ -1,4 +1,4 @@
 package com.workExample.checkInventory.dao;
 
-public class FileMapper {
+public interface FileMapper {
 }
