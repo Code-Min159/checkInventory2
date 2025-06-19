@@ -9,6 +9,8 @@ import java.util.List;
 @Mapper
 public interface ProductMapper {
 
+    @Select("SELECT * FROM product WHERE name = #{name}")
+    Product searchProductByName(@Param("name") String name);
 
     Product getProducWithMaterials(String id);
 

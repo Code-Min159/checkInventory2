@@ -1,4 +1,4 @@
-package com.workExample.checkInventory.server;
+package com.workExample.checkInventory.service;
 
 import com.workExample.checkInventory.dao.MaterailMapper;
 import com.workExample.checkInventory.dao.ProductMapper;
@@ -105,6 +105,7 @@ public class ProductService {
     public Product searchProductById(String id) {
         return productMapper.searchProductById(id);
     }
+
     public Product upProduct(String id, String name, String unit, String description,
                                  String category, String supplier, String location, int safeStock,
                                  boolean isFoodAddtives, boolean isFoodAllergen) {
@@ -139,6 +140,11 @@ public class ProductService {
         } else {
             throw new IllegalArgumentException("Product ID does not exist");
         }
+    }
+
+    //用名稱查詢
+    public Product getProductByName(String name) {
+        return productMapper.searchProductByName(name);
     }
 
     public List<Product> getAllProduct() {

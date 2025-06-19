@@ -1,18 +1,12 @@
 package com.workExample.checkInventory.controller;
 
-import com.workExample.checkInventory.dataObject.ApiResponse;
-import com.workExample.checkInventory.dataObject.Material;
-import com.workExample.checkInventory.server.FileService;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.workExample.checkInventory.service.FileService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.util.List;
-import java.util.Objects;
 
 @RestController
 public class FileController {

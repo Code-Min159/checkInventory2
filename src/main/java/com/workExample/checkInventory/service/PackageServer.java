@@ -1,10 +1,8 @@
-package com.workExample.checkInventory.server;
+package com.workExample.checkInventory.service;
 
 import com.workExample.checkInventory.dao.PackageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class PackageServer {

@@ -2,7 +2,7 @@ package com.workExample.checkInventory.controller;
 
 import com.workExample.checkInventory.dataObject.ApiResponse;
 import com.workExample.checkInventory.dataObject.Material;
-import com.workExample.checkInventory.server.MaterialService;
+import com.workExample.checkInventory.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;

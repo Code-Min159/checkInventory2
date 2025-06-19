@@ -1,14 +1,7 @@
 package com.workExample.checkInventory.controller;
 
-import com.workExample.checkInventory.dataObject.ApiResponse;
-import com.workExample.checkInventory.dataObject.Material;
-import com.workExample.checkInventory.dataObject.Package;
-import com.workExample.checkInventory.server.PackageServer;
-import org.apache.ibatis.annotations.Delete;
-import org.springframework.http.HttpStatusCode;
+import com.workExample.checkInventory.service.PackageServer;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class PackageController {

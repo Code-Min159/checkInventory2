@@ -1,4 +1,4 @@
-package com.workExample.checkInventory.server;
+package com.workExample.checkInventory.service;
 
 
 import com.workExample.checkInventory.dao.MaterailMapper;

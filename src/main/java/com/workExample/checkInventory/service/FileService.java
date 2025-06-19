@@ -1,10 +1,8 @@
-package com.workExample.checkInventory.server;
+package com.workExample.checkInventory.service;
 
 import org.springframework.stereotype.Service;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class FileService {

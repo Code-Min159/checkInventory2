@@ -2,8 +2,9 @@ package com.workExample.checkInventory.controller;
 
 
 import com.workExample.checkInventory.dataObject.ApiResponse;
+import com.workExample.checkInventory.dataObject.Product;
 import com.workExample.checkInventory.dataObject.ToDo;
-import com.workExample.checkInventory.server.ToDoService;
+import com.workExample.checkInventory.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
@@ -16,18 +17,12 @@ public class ToDoController {
     @Autowired
     private ToDoService toDoService;
 
-//    // create category 新增類別(工作、日常)
-//    public DailyToDo newCategory(DailyToDo request) {
-//
-//    }
-
-
     //新增 ok
     @PostMapping("api/addToDo")
     public ApiResponse<ToDo> addToDo(@RequestBody ToDo request) {
         final ApiResponse<ToDo> response = new ApiResponse<>();
         try {
-            ToDo newToDo = toDoService.addToDo(request.getName(), request.getIsCompleted());
+            ToDo newToDo = toDoService.addToDo(request.getName(), request.getIsCompleted(), request.getCategory());
             response.setData(newToDo);
             response.setStasus(HttpStatusCode.valueOf(200));
             response.setMessage("ToDo added successfully");
@@ -57,10 +52,10 @@ public class ToDoController {
 
     //更新 ok
     @PutMapping("api/updateToDo/{id}")
-    public ApiResponse<ToDo> updateToDo(@PathVariable("id") long id, @RequestBody ToDo request) {
+    public ApiResponse<ToDo> updateToDo(@PathVariable long id, @RequestBody ToDo request) {
         final ApiResponse<ToDo> response = new ApiResponse<>();
         try {
-            ToDo updatedToDo = toDoService.updateToDo(id, request.getName(), request.getIsCompleted());
+            ToDo updatedToDo = toDoService.updateToDo(id, request.getName(), request.getIsCompleted(), request.getCategory());
             response.setData(updatedToDo);
             response.setStasus(HttpStatusCode.valueOf(200));
             response.setMessage("ToDo updated successfully");
@@ -88,6 +83,40 @@ public class ToDoController {
         }
         return response;
     }
+
+    @PostMapping("api/getToDoByCategory/{id}")
+    public ApiResponse<List<ToDo>> getToDosWithCategory(@PathVariable("id") Integer category) {
+        final ApiResponse<List<ToDo>> response = new ApiResponse<>();
+        try {
+            List<ToDo> toDos = toDoService.getToDosWithCategory(category);
+            response.setData(toDos);
+            response.setStasus(HttpStatusCode.valueOf(200));
+            response.setMessage("ToDos by category retrieved successfully");
+            return response;
+        } catch (Exception e) {
+            response.setStasus(HttpStatusCode.valueOf(500));
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    //自動排成 cron job
+    //每天凌晨12點將所有清單狀態全部設定為未完成狀態
+    @GetMapping("api/resetAllToDoStatus")
+    public ApiResponse<String> resetAllToDoStatus() {
+        final ApiResponse<String> response = new ApiResponse<>();
+        try {
+            String toDoList = toDoService.resetAllToDoStatus();
+            response.setData(toDoList); // 返回重置後的ToDo列表
+            response.setStasus(HttpStatusCode.valueOf(200));
+            return response;
+        } catch (Exception e) {
+            response.setStasus(HttpStatusCode.valueOf(500));
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
 
 
 }

@@ -2,7 +2,7 @@ package com.workExample.checkInventory.controller;
 
 import com.workExample.checkInventory.dataObject.ApiResponse;
 import com.workExample.checkInventory.dataObject.Product;
-import com.workExample.checkInventory.server.ProductService;
+import com.workExample.checkInventory.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
@@ -91,28 +91,23 @@ public class ProductController {
         }
         return response;
     }
-//    //查詢-依名稱
-//    @GetMapping("api/product/{name}")
-//    public Product searchProductByName(@PathVariable String name) {
-//        // @PathVariable 指URL帶進來的參數
-//        Product product = productService.searchProductByName(name);
-//        return product;
-//    }
-//    //查詢-依供應商
-//    @GetMapping("api/product/{supplier}")
-//    public List<Product> searchProductBySupplier(@PathVariable String supplier) {
-//        // @PathVariable 指URL帶進來的參數
-//        List<Product> products = productService.searchProductBySupplier(supplier);
-//        return products;
-//    }
-//
-//    //查詢-依類別
-//    @GetMapping("api/product/{category}")
-//    public Product searchProduct(@PathVariable String category) {
-//        // @PathVariable 指URL帶進來的參數
-//        Product product = productService.searchProductByCategory(category);
-//        return product;
-//    }
+    //查詢-依名稱
+    @GetMapping("api/getProductWithMaterials/{name}")
+    public ApiResponse<Product> getProductByName(@PathVariable String name) {
+        final ApiResponse<Product> response = new ApiResponse<>();
+        try {
+            final Product product = productService.getProductByName(name);
+            response.setData(product);
+            response.setStasus(HttpStatusCode.valueOf(200));
+            return response;
+        } catch (Exception e) {
+            response.setStasus(HttpStatusCode.valueOf(500));
+            response.setMessage(e.getMessage());
+        }
+        return response;
+    }
+
+
 //    //查詢庫存量
 
 
